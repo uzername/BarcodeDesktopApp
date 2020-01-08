@@ -46,7 +46,7 @@ namespace BarcodeDesktopApp.DataHandling
             "ID INTEGER PRIMARY KEY," +
             "Barcode TEXT NOT NULL UNIQUE," +
             "BarcodePart TEXT NOT NULL UNIQUE," +
-            "BARCODETYPE TEXT" +
+            "BARCODETYPE Integer" +
             ")";
 
         public void getDataFromConfigFile()  {
@@ -106,7 +106,7 @@ namespace BarcodeDesktopApp.DataHandling
                     barcodePartData.ID = sqlite_datareader.GetInt32(0);
                     barcodePartData.BarcodeRaw = sqlite_datareader.GetString(1);
                     barcodePartData.BarcodePart = sqlite_datareader.GetString(2);
-                    barcodePartData.BarcodeType = sqlite_datareader.GetString(3);
+                    barcodePartData.BarcodeType = (BarcodeTypeEnum)sqlite_datareader.GetInt32(3);
                     rslt.Add(barcodePartData);
                 }
             }
@@ -187,6 +187,54 @@ namespace BarcodeDesktopApp.DataHandling
             sql_con.Close();
             return rslt;
 
+        }
+
+        public void insertNewEntryToPartsList(String in_newPart, String in_rawGenValue, BarcodeTypeEnum in_barcodeType = BarcodeTypeEnum.EAN13)
+        {
+            //String dbquery = "Insert into"
+
+        }
+
+        // Generate a random string with a given size  
+        private string RandomString(int size)
+        {
+            StringBuilder builder = new StringBuilder();
+            Random random = new Random();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(10 * random.NextDouble() + 48)));
+                builder.Append(ch);
+            }
+
+            return builder.ToString();
+        }
+
+        public String generateNewBarcodeNumeric(BarcodeTypeEnum in_barcodeType = BarcodeTypeEnum.EAN13)
+        {
+            String valueToReturn = "";
+            List<String> allStringies = new List<string>();
+            String dbQuery = "Select Barcode from Parts WHERE BARCODETYPE = @BarcodeTypeIn";
+            SQLiteConnection sql_con = new SQLiteConnection("Data Source=" + newconfig.pathToDatabase);
+            sql_con.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand(sql_con))
+            {
+                cmd.CommandText = dbQuery;
+                cmd.Parameters.AddWithValue("@BarcodeTypeIn", (int)in_barcodeType);
+                SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
+                while (sqlite_datareader.Read())
+                {
+                    string RCode_ = sqlite_datareader.GetString(0);
+                    allStringies.Add(RCode_);
+                }
+            }
+            bool valueGenerated = false;
+            do {
+                valueToReturn = this.RandomString(12);
+                valueGenerated = !(allStringies.Contains(valueToReturn));
+            } while (!valueGenerated);
+            sql_con.Close();
+            return valueToReturn;
         }
 
     }

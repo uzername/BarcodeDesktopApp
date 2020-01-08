@@ -29,7 +29,7 @@ namespace BarcodeDesktopApp
 
         private void buttonNewEmptyRecord_Click(object sender, EventArgs e)
         {
-            FormNewBarcode newBarcodeWnd = new FormNewBarcode(dataHandlerLocal.allPartsList);
+            FormNewBarcode newBarcodeWnd = new FormNewBarcode(dataHandlerLocal.allPartsList,dataHandlerLocal);
             DialogResult rsDialg = newBarcodeWnd.ShowDialog();
             if (rsDialg == DialogResult.OK)
             {
