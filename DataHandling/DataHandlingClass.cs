@@ -188,11 +188,46 @@ namespace BarcodeDesktopApp.DataHandling
             return rslt;
 
         }
-
-        public void insertNewEntryToPartsList(String in_newPart, String in_rawGenValue, BarcodeTypeEnum in_barcodeType = BarcodeTypeEnum.EAN13)
+        /// <summary>
+        /// Add new entry to list of parts. Or find its ID if this entry already exists
+        /// </summary>
+        /// <param name="in_newPart"></param>
+        /// <param name="in_rawGenValue"></param>
+        /// <param name="in_barcodeType"></param>
+        public int insertNewEntryToPartsList(String in_newPart, String in_rawGenValue, ref bool entryAdded, BarcodeTypeEnum in_barcodeType = BarcodeTypeEnum.EAN13)
         {
-            //String dbquery = "Insert into"
+            int IDwasAdded = -1;
+            entryAdded = true;
+            String dbquerySelect = "Select ID from Parts where BarcodePart = @inPartName";
+            String dbqueryInsert = "Insert into Parts(Barcode, BarcodePart, BARCODETYPE) VALUES (@in_NewBarcode, @in_BarcodePart, @in_BarcodeType)";
+            SQLiteConnection sql_con = new SQLiteConnection("Data Source=" + newconfig.pathToDatabase);
+            sql_con.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand(sql_con))
+            {
+                cmd.CommandText = dbquerySelect;
+                cmd.Parameters.AddWithValue("@inPartName", in_newPart);
+                long? foundID = (long?)cmd.ExecuteScalar();
+                if (foundID != null)  {
+                    IDwasAdded = (int)foundID.Value;
+                    entryAdded = false;
+                } else {
+                    cmd.CommandText = dbqueryInsert;
+                    cmd.Parameters.AddWithValue("@in_NewBarcode", in_rawGenValue);
+                    cmd.Parameters.AddWithValue("@in_BarcodePart", in_newPart);
+                    cmd.Parameters.AddWithValue("@in_BarcodeType", in_barcodeType);
+                    cmd.ExecuteNonQuery();
 
+                    cmd.CommandText = dbquerySelect;
+                    cmd.Parameters.AddWithValue("@inPartName", in_newPart);
+                    long? foundID2 = (long?)cmd.ExecuteScalar();
+                    if (foundID2 != null)  {
+                        IDwasAdded =(int) foundID2.Value;
+                    }
+
+                }
+            }
+            sql_con.Close();
+            return IDwasAdded;
         }
 
         // Generate a random string with a given size  

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.BarcodeLabel = new System.Windows.Forms.Label();
             this.textBoxBarcode = new System.Windows.Forms.TextBox();
             this.PartLabel = new System.Windows.Forms.Label();
@@ -44,8 +45,10 @@
             this.buttonForCancel = new System.Windows.Forms.Button();
             this.numberTruck = new System.Windows.Forms.NumericUpDown();
             this.buttonGenerate = new System.Windows.Forms.Button();
+            this.errorProviderPart = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberTruck)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderPart)).BeginInit();
             this.SuspendLayout();
             // 
             // BarcodeLabel
@@ -60,12 +63,14 @@
             // 
             // textBoxBarcode
             // 
+            this.errorProviderPart.SetIconAlignment(this.textBoxBarcode, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.textBoxBarcode.Location = new System.Drawing.Point(88, 41);
             this.textBoxBarcode.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBoxBarcode.Name = "textBoxBarcode";
             this.textBoxBarcode.ReadOnly = true;
             this.textBoxBarcode.Size = new System.Drawing.Size(128, 22);
             this.textBoxBarcode.TabIndex = 1;
+            this.textBoxBarcode.TextChanged += new System.EventHandler(this.textBoxBarcode_TextChanged);
             // 
             // PartLabel
             // 
@@ -100,7 +105,7 @@
             // CustomerLabel
             // 
             this.CustomerLabel.AutoSize = true;
-            this.CustomerLabel.Location = new System.Drawing.Point(16, 128);
+            this.CustomerLabel.Location = new System.Drawing.Point(9, 130);
             this.CustomerLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.CustomerLabel.Name = "CustomerLabel";
             this.CustomerLabel.Size = new System.Drawing.Size(65, 16);
@@ -110,7 +115,7 @@
             // MachineLabel
             // 
             this.MachineLabel.AutoSize = true;
-            this.MachineLabel.Location = new System.Drawing.Point(16, 157);
+            this.MachineLabel.Location = new System.Drawing.Point(9, 159);
             this.MachineLabel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.MachineLabel.Name = "MachineLabel";
             this.MachineLabel.Size = new System.Drawing.Size(59, 16);
@@ -128,13 +133,17 @@
             // 
             // cmbPart
             // 
+            this.cmbPart.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbPart.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbPart.FormattingEnabled = true;
+            this.errorProviderPart.SetIconAlignment(this.cmbPart, System.Windows.Forms.ErrorIconAlignment.MiddleLeft);
             this.cmbPart.Location = new System.Drawing.Point(88, 9);
             this.cmbPart.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.cmbPart.Name = "cmbPart";
             this.cmbPart.Size = new System.Drawing.Size(161, 24);
             this.cmbPart.TabIndex = 0;
             this.cmbPart.Leave += new System.EventHandler(this.cmbPart_Leave);
+            this.cmbPart.Validating += new System.ComponentModel.CancelEventHandler(this.cmbPart_Validating);
             // 
             // textCustomer
             // 
@@ -157,6 +166,7 @@
             this.pictureBoxBarCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxBarCode.Location = new System.Drawing.Point(257, 7);
             this.pictureBoxBarCode.Name = "pictureBoxBarCode";
+            this.pictureBoxBarCode.Padding = new System.Windows.Forms.Padding(2);
             this.pictureBoxBarCode.Size = new System.Drawing.Size(216, 114);
             this.pictureBoxBarCode.TabIndex = 12;
             this.pictureBoxBarCode.TabStop = false;
@@ -200,6 +210,7 @@
             // 
             // buttonGenerate
             // 
+            this.buttonGenerate.Enabled = false;
             this.buttonGenerate.Image = global::BarcodeDesktopApp.Properties.Resources.ARW03RT;
             this.buttonGenerate.Location = new System.Drawing.Point(219, 36);
             this.buttonGenerate.Name = "buttonGenerate";
@@ -207,6 +218,10 @@
             this.buttonGenerate.TabIndex = 16;
             this.buttonGenerate.UseVisualStyleBackColor = true;
             this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
+            // 
+            // errorProviderPart
+            // 
+            this.errorProviderPart.ContainerControl = this;
             // 
             // FormNewBarcode
             // 
@@ -238,6 +253,7 @@
             this.Text = "New Part Entry";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBarCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberTruck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderPart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,5 +277,6 @@
         private System.Windows.Forms.Button buttonForCancel;
         private System.Windows.Forms.NumericUpDown numberTruck;
         private System.Windows.Forms.Button buttonGenerate;
+        private System.Windows.Forms.ErrorProvider errorProviderPart;
     }
 }

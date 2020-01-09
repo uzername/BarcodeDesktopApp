@@ -33,8 +33,12 @@ namespace BarcodeDesktopApp
             DialogResult rsDialg = newBarcodeWnd.ShowDialog();
             if (rsDialg == DialogResult.OK)
             {
-                // check availability of part name
-
+                // check part name and rescan list if needed
+                bool refreshPartList = false;
+                dataHandlerLocal.insertNewEntryToPartsList(newBarcodeWnd.partName, newBarcodeWnd.barcodeString, ref refreshPartList);
+                if (refreshPartList) {
+                    dataHandlerLocal.allPartsList = dataHandlerLocal.getAllParts();
+                }
                 // save new part if required
 
             }
