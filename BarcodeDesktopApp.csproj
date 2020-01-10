@@ -79,6 +79,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalizableStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="PrintConfigWnd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintConfigWnd.Designer.cs">
+      <DependentUpon>PrintConfigWnd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
