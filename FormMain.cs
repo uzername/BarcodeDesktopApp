@@ -14,7 +14,7 @@ namespace BarcodeDesktopApp
     public partial class FormMain : Form
     {
         public DataHandlingClass dataHandlerLocal = new DataHandlingClass();
-
+        private List<BarcodeDataClass> lstForTableInForm; // may be worth moving to DataHandlingClass, like allPartsList
         public FormMain()
         {
             InitializeComponent();
@@ -22,9 +22,9 @@ namespace BarcodeDesktopApp
             dataHandlerLocal.getDataFromConfigFile();
             dataHandlerLocal.checkDbAvailabilityAndRecreate(dataHandlerLocal.newconfig.pathToDatabase);
             //fill now table
-            List<BarcodeDataClass> lst = dataHandlerLocal.getBarcodesDataFromDataBase(null);
+            lstForTableInForm = dataHandlerLocal.getBarcodesDataFromDataBase(null);
             dataHandlerLocal.allPartsList = dataHandlerLocal.getAllParts();
-            this.objectListViewMain.SetObjects(lst);
+            this.objectListViewMain.SetObjects(lstForTableInForm);
         }
 
         private void buttonNewEmptyRecord_Click(object sender, EventArgs e)
@@ -35,20 +35,33 @@ namespace BarcodeDesktopApp
             {
                 // check part name and rescan list if needed
                 bool refreshPartList = false;
-                dataHandlerLocal.insertNewEntryToPartsList(newBarcodeWnd.partName, newBarcodeWnd.barcodeString, ref refreshPartList);
+                int IDofRelatedPart = dataHandlerLocal.insertNewEntryToPartsList(newBarcodeWnd.partName, newBarcodeWnd.barcodeString, ref refreshPartList);
                 if (refreshPartList) {
-                    dataHandlerLocal.allPartsList = dataHandlerLocal.getAllParts();
+                    //dataHandlerLocal.allPartsList = dataHandlerLocal.getAllParts();
+                    // line above was changed to this:
+                    dataHandlerLocal.allPartsList.Add(new BarcodePartDataClass { BarcodeType = BarcodeTypeEnum.EAN13, BarcodePart = newBarcodeWnd.partName, BarcodeRaw = newBarcodeWnd.barcodeString });
                 }
-                // save new part if required
-
+                // save new part
+                dataHandlerLocal.insertNewEntryToBarcodesList(IDofRelatedPart,newBarcodeWnd.BarcodeDate, newBarcodeWnd.BarcodeTruck, newBarcodeWnd.BarcodeCustomer, newBarcodeWnd.BarcodeMachine);
+                this.lstForTableInForm.Insert(0, new BarcodeDataClass
+                {
+                    BarcodeCustomer = newBarcodeWnd.BarcodeCustomer,
+                    BarcodeDate = newBarcodeWnd.BarcodeDate,
+                    BarcodeMachine = newBarcodeWnd.BarcodeMachine,
+                    BarcodePart = newBarcodeWnd.partName,
+                    BarcodeTruck = newBarcodeWnd.BarcodeTruck,
+                    barcodePartID = IDofRelatedPart
+                });
+                this.objectListViewMain.SetObjects(lstForTableInForm);
             }
 
         }
 
         private void objectListViewMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            buttonCopyRecord.Enabled = true;
-            buttonPrint.Enabled = true;
+
+                buttonCopyRecord.Enabled = (objectListViewMain.SelectedIndex != -1);
+                buttonPrint.Enabled = (objectListViewMain.SelectedIndex != -1);
         }
 
         private void buttonFilter_Click(object sender, EventArgs e)

@@ -20,6 +20,11 @@ namespace BarcodeDesktopApp
         public string partName { get; private set; }
         public string barcodeString { get; private set; }
 
+        public DateTime BarcodeDate { get; private set; }
+        public int BarcodeTruck { get; private set; }
+        public string BarcodeCustomer { get; private set; }
+        public string BarcodeMachine { get; private set; }
+
         public FormNewBarcode(List<BarcodePartDataClass> in_ListAllParts, DataHandlingClass in_dataThings)
         {
             InitializeComponent();
@@ -57,6 +62,11 @@ namespace BarcodeDesktopApp
             {
                 partName = this.cmbPart.Text;
                 barcodeString = this.textBoxBarcode.Text;
+                BarcodeDate = this.DateDelivery.Value;
+                BarcodeTruck = (int) this.numberTruck.Value;
+                BarcodeCustomer = this.textCustomer.Text;
+                BarcodeMachine = this.textMachine.Text;
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

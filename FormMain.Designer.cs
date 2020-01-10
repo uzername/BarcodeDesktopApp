@@ -30,15 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.objectListViewMain = new BrightIdeasSoftware.ObjectListView();
-            this.buttonNewEmptyRecord = new System.Windows.Forms.Button();
-            this.buttonCopyRecord = new System.Windows.Forms.Button();
-            this.buttonPrint = new System.Windows.Forms.Button();
-            this.buttonFilter = new System.Windows.Forms.Button();
             this.olvColumnPartNumber = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnDeliveryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnTruckNumber = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnMachineName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnCustomer = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.buttonNewEmptyRecord = new System.Windows.Forms.Button();
+            this.buttonCopyRecord = new System.Windows.Forms.Button();
+            this.buttonPrint = new System.Windows.Forms.Button();
+            this.buttonFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +51,7 @@
             this.objectListViewMain.AllColumns.Add(this.olvColumnCustomer);
             resources.ApplyResources(this.objectListViewMain, "objectListViewMain");
             this.objectListViewMain.CellEditUseWholeCell = false;
+            this.objectListViewMain.CheckBoxes = true;
             this.objectListViewMain.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnPartNumber,
             this.olvColumnDeliveryDate,
@@ -58,11 +59,41 @@
             this.olvColumnMachineName,
             this.olvColumnCustomer});
             this.objectListViewMain.Cursor = System.Windows.Forms.Cursors.Default;
+            this.objectListViewMain.FullRowSelect = true;
+            this.objectListViewMain.HasCollapsibleGroups = false;
             this.objectListViewMain.HideSelection = false;
+            this.objectListViewMain.MultiSelect = false;
             this.objectListViewMain.Name = "objectListViewMain";
+            this.objectListViewMain.ShowGroups = false;
             this.objectListViewMain.UseCompatibleStateImageBehavior = false;
             this.objectListViewMain.View = System.Windows.Forms.View.Details;
             this.objectListViewMain.SelectedIndexChanged += new System.EventHandler(this.objectListViewMain_SelectedIndexChanged);
+            // 
+            // olvColumnPartNumber
+            // 
+            this.olvColumnPartNumber.AspectName = "BarcodePart";
+            resources.ApplyResources(this.olvColumnPartNumber, "olvColumnPartNumber");
+            // 
+            // olvColumnDeliveryDate
+            // 
+            this.olvColumnDeliveryDate.AspectName = "BarcodeDate";
+            this.olvColumnDeliveryDate.AspectToStringFormat = "{0:dd/MM/yyyy}";
+            resources.ApplyResources(this.olvColumnDeliveryDate, "olvColumnDeliveryDate");
+            // 
+            // olvColumnTruckNumber
+            // 
+            this.olvColumnTruckNumber.AspectName = "BarcodeTruck";
+            resources.ApplyResources(this.olvColumnTruckNumber, "olvColumnTruckNumber");
+            // 
+            // olvColumnMachineName
+            // 
+            this.olvColumnMachineName.AspectName = "BarcodeMachine";
+            resources.ApplyResources(this.olvColumnMachineName, "olvColumnMachineName");
+            // 
+            // olvColumnCustomer
+            // 
+            this.olvColumnCustomer.AspectName = "BarcodeCustomer";
+            resources.ApplyResources(this.olvColumnCustomer, "olvColumnCustomer");
             // 
             // buttonNewEmptyRecord
             // 
@@ -90,31 +121,6 @@
             this.buttonFilter.UseVisualStyleBackColor = true;
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
             // 
-            // olvColumnPartNumber
-            // 
-            this.olvColumnPartNumber.AspectName = "BarcodePart";
-            resources.ApplyResources(this.olvColumnPartNumber, "olvColumnPartNumber");
-            // 
-            // olvColumnDeliveryDate
-            // 
-            this.olvColumnDeliveryDate.AspectName = "BarcodeDate";
-            resources.ApplyResources(this.olvColumnDeliveryDate, "olvColumnDeliveryDate");
-            // 
-            // olvColumnTruckNumber
-            // 
-            this.olvColumnTruckNumber.AspectName = "BarcodeTruck";
-            resources.ApplyResources(this.olvColumnTruckNumber, "olvColumnTruckNumber");
-            // 
-            // olvColumnMachineName
-            // 
-            this.olvColumnMachineName.AspectName = "BarcodeMachine";
-            resources.ApplyResources(this.olvColumnMachineName, "olvColumnMachineName");
-            // 
-            // olvColumnCustomer
-            // 
-            this.olvColumnCustomer.AspectName = "BarcodeCustomer";
-            resources.ApplyResources(this.olvColumnCustomer, "olvColumnCustomer");
-            // 
             // FormMain
             // 
             resources.ApplyResources(this, "$this");
@@ -124,6 +130,7 @@
             this.Controls.Add(this.buttonCopyRecord);
             this.Controls.Add(this.buttonNewEmptyRecord);
             this.Controls.Add(this.objectListViewMain);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Name = "FormMain";
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewMain)).EndInit();
             this.ResumeLayout(false);

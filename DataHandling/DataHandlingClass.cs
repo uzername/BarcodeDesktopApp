@@ -152,7 +152,7 @@ namespace BarcodeDesktopApp.DataHandling
 
             }
             List<BarcodeDataClass> rslt = new List<BarcodeDataClass>();
-            String dbquery = "Select * from Barcodes inner join Parts on Barcodes.ID_part = Parts.ID " + condition;
+            String dbquery = "Select Barcodes.ID,  BarcodePart, BarcodeDate, BarcodeTruck, BarcodeMachine, BarcodeCustomer, BarcodeDateAdded from Barcodes inner join Parts on Barcodes.ID_part = Parts.ID " + condition + " ORDER BY BarcodeDateAdded DESC ";
             SQLiteConnection sql_con = new SQLiteConnection("Data Source=" + newconfig.pathToDatabase);
             sql_con.Open();
             using (SQLiteCommand cmd = new SQLiteCommand(sql_con))
@@ -194,6 +194,8 @@ namespace BarcodeDesktopApp.DataHandling
         /// <param name="in_newPart"></param>
         /// <param name="in_rawGenValue"></param>
         /// <param name="in_barcodeType"></param>
+        /// <param name="entryAdded">is entry with this part name already available in database, or no...</param>
+        /// <returns> ID of entry in parts list: either found or newly added</returns>
         public int insertNewEntryToPartsList(String in_newPart, String in_rawGenValue, ref bool entryAdded, BarcodeTypeEnum in_barcodeType = BarcodeTypeEnum.EAN13)
         {
             int IDwasAdded = -1;
@@ -224,6 +226,37 @@ namespace BarcodeDesktopApp.DataHandling
                         IDwasAdded =(int) foundID2.Value;
                     }
 
+                }
+            }
+            sql_con.Close();
+            return IDwasAdded;
+        }
+
+        public int insertNewEntryToBarcodesList( int extIDpart, DateTime in_BarcodeDate, int in_BarcodeTruck, string in_BarcodeCustomer, string in_BarcodeMachine )
+        {
+            int IDwasAdded = -1;
+            String dbqueryInsert = "Insert into Barcodes(ID_Part, BarcodeDate, BarcodeTruck, BarcodeCustomer, BarcodeMachine, BarcodeDateAdded) VALUES (@in_ID_Part, @in_BarcodeDate, @in_BarcodeTruck, @in_BarcodeCustomer, @in_BarcodeMachine, @in_BarcodeDateAdded)";
+            String dbQuerySelect = "Select ID from Barcodes where BarcodeDateAdded = @in_BarcodeDateAdded2";
+            SQLiteConnection sql_con = new SQLiteConnection("Data Source=" + newconfig.pathToDatabase);
+            sql_con.Open();
+            using (SQLiteCommand cmd = new SQLiteCommand(sql_con))
+            {
+                cmd.CommandText = dbqueryInsert;
+                cmd.Parameters.AddWithValue("@in_ID_Part", extIDpart);
+                cmd.Parameters.AddWithValue("@in_BarcodeDate", in_BarcodeDate);
+                cmd.Parameters.AddWithValue("@in_BarcodeTruck", in_BarcodeTruck);
+                cmd.Parameters.AddWithValue("@in_BarcodeCustomer", in_BarcodeCustomer);
+                cmd.Parameters.AddWithValue("@in_BarcodeMachine", in_BarcodeMachine);
+                DateTime timeWhenItWasAdded = DateTime.Now;
+                cmd.Parameters.AddWithValue("@in_BarcodeDateAdded",timeWhenItWasAdded);
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = dbQuerySelect;
+                cmd.Parameters.AddWithValue("in_BarcodeDateAdded2",timeWhenItWasAdded);
+                long? foundID = (long?) cmd.ExecuteScalar();
+                if (foundID!=null)
+                {
+                    IDwasAdded = (int) foundID.Value;
                 }
             }
             sql_con.Close();
