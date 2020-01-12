@@ -61,12 +61,22 @@ namespace BarcodeDesktopApp
         {
 
                 buttonCopyRecord.Enabled = (objectListViewMain.SelectedIndex != -1);
-                buttonPrint.Enabled = (objectListViewMain.SelectedIndex != -1);
+                //buttonPrint.Enabled = (objectListViewMain.SelectedIndex != -1);
         }
 
         private void buttonFilter_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ButtonPrint_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ObjectListViewMain_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            buttonPrint.Enabled = (objectListViewMain.CheckedObjects.Count > 0);
         }
     }
 }

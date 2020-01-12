@@ -11,7 +11,7 @@ namespace BarcodeDesktopApp.DataHandling
     [Serializable]
     public class DataHandlingConfig
     {
-        
+        public BarcodePrintingParameterClass labelParameters = new BarcodePrintingParameterClass();
         public string pathToDatabase;
     }
     public class DbFilterStruct  {

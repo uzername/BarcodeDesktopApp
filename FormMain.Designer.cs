@@ -67,6 +67,7 @@
             this.objectListViewMain.ShowGroups = false;
             this.objectListViewMain.UseCompatibleStateImageBehavior = false;
             this.objectListViewMain.View = System.Windows.Forms.View.Details;
+            this.objectListViewMain.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.ObjectListViewMain_ItemChecked);
             this.objectListViewMain.SelectedIndexChanged += new System.EventHandler(this.objectListViewMain_SelectedIndexChanged);
             // 
             // olvColumnPartNumber
@@ -113,6 +114,7 @@
             resources.ApplyResources(this.buttonPrint, "buttonPrint");
             this.buttonPrint.Name = "buttonPrint";
             this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.ButtonPrint_Click);
             // 
             // buttonFilter
             // 

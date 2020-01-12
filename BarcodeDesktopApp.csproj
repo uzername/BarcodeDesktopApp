@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataHandling\BarcodeDataClass.cs" />
+    <Compile Include="DataHandling\BarcodePrintingParameterClass.cs" />
     <Compile Include="DataHandling\DataHandlingClass.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
