@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ErrorEmptyBarcode" xml:space="preserve">
-    <value>Barcode is empty</value>
-  </data>
-  <data name="ErrorEmptyPart" xml:space="preserve">
-    <value>Part name is empty</value>
-  </data>
-  <data name="ErrorEmptyPrinter" xml:space="preserve">
-    <value>Printer name is empty</value>
-  </data>
+  <metadata name="printDoc.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>116, 17</value>
+  </metadata>
 </root>

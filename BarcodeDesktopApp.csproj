@@ -98,6 +98,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizableStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintConfigWnd.resx">
+      <DependentUpon>PrintConfigWnd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

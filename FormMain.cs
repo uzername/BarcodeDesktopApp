@@ -4,17 +4,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+// https://docs.microsoft.com/en-us/dotnet/framework/winforms/advanced/windows-forms-print-support
 namespace BarcodeDesktopApp
 {
     public partial class FormMain : Form
     {
         public DataHandlingClass dataHandlerLocal = new DataHandlingClass();
         private List<BarcodeDataClass> lstForTableInForm; // may be worth moving to DataHandlingClass, like allPartsList
+        PrintConfigWnd wndForPrint = new PrintConfigWnd();
+
+
         public FormMain()
         {
             InitializeComponent();
@@ -69,9 +73,9 @@ namespace BarcodeDesktopApp
 
         }
 
-        private void ButtonPrint_Click(object sender, EventArgs e)
-        {
-
+        private void ButtonPrint_Click(object sender, EventArgs e)  {
+            wndForPrint.itemsToShow = objectListViewMain.CheckedObjects as List<BarcodeDataClass>;
+            wndForPrint.ShowDialog();
         }
 
         private void ObjectListViewMain_ItemChecked(object sender, ItemCheckedEventArgs e)

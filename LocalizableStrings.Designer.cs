@@ -77,5 +77,14 @@ namespace BarcodeDesktopApp {
                 return ResourceManager.GetString("ErrorEmptyPart", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Printer name is empty.
+        /// </summary>
+        internal static string ErrorEmptyPrinter {
+            get {
+                return ResourceManager.GetString("ErrorEmptyPrinter", resourceCulture);
+            }
+        }
     }
 }
