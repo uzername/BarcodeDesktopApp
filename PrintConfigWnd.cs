@@ -16,7 +16,7 @@ namespace BarcodeDesktopApp
     public partial class PrintConfigWnd : Form
     {
         // assign these values before showing up form (maube worth to move them to constructor)
-        public List<BarcodeDataClass> itemsToShow = null;
+        public List<BarcodeDataClass> itemsToShow = new List<BarcodeDataClass>();
         public DataHandlingClass handlingClassRef = null;
         bool doomedToReturn = false;
 
@@ -26,7 +26,7 @@ namespace BarcodeDesktopApp
             printDoc.QueryPageSettings += PrintDoc_QueryPageSettings;
             printDoc.PrintPage += PrintDoc_PrintPage;
         }
-        
+        // called when form is opened, every time
         private void PrintConfigWnd_Load(object sender, EventArgs e)  {
             // fill printer list
             fillPrinterList();
@@ -46,18 +46,21 @@ namespace BarcodeDesktopApp
                 doomedToReturn = true;
             }
             if (doomedToReturn) return;
-            
+            this.printPreviewControl1.Document = printDoc;
         }
 
         private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
-            
+            //printPreviewControl1.Document = printDoc;
         }
 
         private void PrintDoc_QueryPageSettings(object sender, QueryPageSettingsEventArgs e)
         {
             PageSettings nSettings = new PageSettings();
-            //e.PageSettings
+            int properWidthInHundretsOfInches = (int)(handlingClassRef.newconfig.labelParameters.barcodeLabelWidthMM * (1.0 / 25.4) * 100.0);
+            int properHeightInHundretsOfInches = (int)(handlingClassRef.newconfig.labelParameters.barcodeLabelHeightMM * (1.0 / 25.4) * 100.0);
+            nSettings.PaperSize = new PaperSize("label", (int)properWidthInHundretsOfInches, (int)properHeightInHundretsOfInches);
+            e.PageSettings = nSettings;
         }
 
         private void fillPrinterList ()
@@ -81,6 +84,7 @@ namespace BarcodeDesktopApp
                 errorProvider1.SetError(comboInstalledPrinters, null);
             }
             printDoc.PrinterSettings.PrinterName = comboInstalledPrinters.Text;
+            
         }
     }
 }

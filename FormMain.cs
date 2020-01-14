@@ -74,7 +74,17 @@ namespace BarcodeDesktopApp
         }
 
         private void ButtonPrint_Click(object sender, EventArgs e)  {
-            wndForPrint.itemsToShow = objectListViewMain.CheckedObjects as List<BarcodeDataClass>;
+            //wndForPrint.itemsToShow = objectListViewMain.CheckedObjects as List<BarcodeDataClass>;
+            if (wndForPrint.itemsToShow == null)  {
+                wndForPrint.itemsToShow = new List<BarcodeDataClass>();
+            }
+            wndForPrint.itemsToShow.Clear();
+            foreach (BarcodeDataClass item in objectListViewMain.CheckedObjects)
+            {
+                wndForPrint.itemsToShow.Add(item);
+            }
+
+            wndForPrint.handlingClassRef = dataHandlerLocal;
             wndForPrint.ShowDialog();
         }
 
