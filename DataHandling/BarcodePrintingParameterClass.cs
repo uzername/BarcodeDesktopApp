@@ -12,7 +12,7 @@ namespace BarcodeDesktopApp.DataHandling
         public double barcodeLabelHeightMM { get; set; } = 30;
         public double barcodeLabelBCodeWidthMM { get; set; } = 40;
         public double barcodeLabelBCodeHeightMM { get; set; } = 15;
-
-        
+        // latest picked printer is used during print preview form
+        public String latestPickedPrinter = "";
     }
 }

@@ -71,11 +71,14 @@
             // 
             // comboInstalledPrinters
             // 
+            this.comboInstalledPrinters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboInstalledPrinters.FormattingEnabled = true;
             this.comboInstalledPrinters.Location = new System.Drawing.Point(3, 3);
             this.comboInstalledPrinters.Name = "comboInstalledPrinters";
             this.comboInstalledPrinters.Size = new System.Drawing.Size(560, 21);
             this.comboInstalledPrinters.TabIndex = 3;
+            this.comboInstalledPrinters.SelectedIndexChanged += new System.EventHandler(this.comboInstalledPrinters_SelectedIndexChanged);
+            this.comboInstalledPrinters.SelectedValueChanged += new System.EventHandler(this.comboInstalledPrinters_SelectedValueChanged);
             // 
             // errorProvider1
             // 
@@ -92,6 +95,7 @@
             this.Controls.Add(this.printPreviewControl1);
             this.Name = "PrintConfigWnd";
             this.Text = "PrintConfigWnd";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PrintConfigWnd_FormClosing);
             this.Load += new System.EventHandler(this.PrintConfigWnd_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

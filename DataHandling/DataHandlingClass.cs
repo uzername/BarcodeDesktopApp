@@ -64,6 +64,13 @@ namespace BarcodeDesktopApp.DataHandling
             }
         }
 
+        public void saveDataToConfigFile()  {
+            XmlSerializer formatter = new XmlSerializer(typeof(DataHandlingConfig));
+              using (FileStream fs = new FileStream(pathToConfigFile, FileMode.Create))  {
+                   formatter.Serialize(fs, newconfig);
+              }
+        }
+
         /// <summary>
         /// START WITH THIS SUBROUTINE! check whether local sqlite db is available. if not then create it, add some user with full rights, else - exit method
         /// </summary>

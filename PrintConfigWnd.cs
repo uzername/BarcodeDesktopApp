@@ -18,7 +18,8 @@ namespace BarcodeDesktopApp
         // assign these values before showing up form (maube worth to move them to constructor)
         public List<BarcodeDataClass> itemsToShow = new List<BarcodeDataClass>();
         public DataHandlingClass handlingClassRef = null;
-        bool doomedToReturn = false;
+        bool ignoreInputEvents = true;
+        bool doomedToReturn = true;
 
         public PrintConfigWnd()
         {
@@ -28,9 +29,11 @@ namespace BarcodeDesktopApp
         }
         // called when form is opened, every time
         private void PrintConfigWnd_Load(object sender, EventArgs e)  {
+            ignoreInputEvents = true;
             // fill printer list
             fillPrinterList();
             fillPrintDocument();
+            ignoreInputEvents = false;
         }
 
         private void fillPrintDocument()  {
@@ -46,12 +49,25 @@ namespace BarcodeDesktopApp
                 doomedToReturn = true;
             }
             if (doomedToReturn) return;
+            maxPagePrinting = itemsToShow.Count;
+            currentPagePrinting = 1;
             this.printPreviewControl1.Document = printDoc;
         }
-
+        //pointer to what page is now printing. starts from 1
+        private int currentPagePrinting = 0;
+        private int maxPagePrinting = 0;
         private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
             //printPreviewControl1.Document = printDoc;
+            if (currentPagePrinting <= maxPagePrinting)  {
+                currentPagePrinting++;
+                e.HasMorePages = true;
+            } else
+            {
+                e.HasMorePages = false;
+                // risk of infinite cycle
+                currentPagePrinting = 1;
+            }
         }
 
         private void PrintDoc_QueryPageSettings(object sender, QueryPageSettingsEventArgs e)
@@ -85,6 +101,25 @@ namespace BarcodeDesktopApp
             }
             printDoc.PrinterSettings.PrinterName = comboInstalledPrinters.Text;
             
+            printDoc.Print();
+        }
+
+        private void comboInstalledPrinters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreInputEvents) return;
+            printDoc.PrinterSettings.PrinterName = comboInstalledPrinters.Text;
+            printPreviewControl1.InvalidatePreview();
+        }
+
+        private void comboInstalledPrinters_SelectedValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void PrintConfigWnd_FormClosing(object sender, FormClosingEventArgs e)  {
+            //save here last selected printer
+            handlingClassRef.newconfig.labelParameters.latestPickedPrinter = comboInstalledPrinters.Text;
+            handlingClassRef.saveDataToConfigFile();
         }
     }
 }
