@@ -98,15 +98,21 @@ namespace BarcodeDesktopApp.DataHandling
             return retvalue;
         }
         // getBarcodesDataClass does not retrieve all parts. there may be parts which were not in production.
-        public List<BarcodePartDataClass> getAllParts()
+        public List<BarcodePartDataClass> getAllParts(int? BarcodeIDFltr = null)
         {
             List<BarcodePartDataClass> rslt = new List<BarcodePartDataClass>();
             String dbquery = "Select * from Parts ";
+            if (BarcodeIDFltr != null)  {
+                dbquery += "WHERE ID = @BarcodePartID";
+            }
             SQLiteConnection sql_con = new SQLiteConnection("Data Source=" + newconfig.pathToDatabase);
             sql_con.Open();
             using (SQLiteCommand cmd = new SQLiteCommand(sql_con))
             {
                 cmd.CommandText = dbquery;
+                if (BarcodeIDFltr != null)  {
+                    cmd.Parameters.AddWithValue("@BarcodePartID", BarcodeIDFltr.Value);
+                }
                 SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
                 while (sqlite_datareader.Read())  {
                     BarcodePartDataClass barcodePartData = new BarcodePartDataClass();

@@ -10,6 +10,7 @@ namespace BarcodeDesktopApp.DataHandling
     public class BarcodePrintingParameterClass {
         public double barcodeLabelWidthMM { get; set; } = 57;
         public double barcodeLabelHeightMM { get; set; } = 30;
+        public double barcodeLabelMarginMM { get; set; } = 3;
         public double barcodeLabelBCodeWidthMM { get; set; } = 40;
         public double barcodeLabelBCodeHeightMM { get; set; } = 15;
         // latest picked printer is used during print preview form

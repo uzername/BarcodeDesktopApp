@@ -35,6 +35,7 @@
             this.comboInstalledPrinters = new System.Windows.Forms.ComboBox();
             this.printDoc = new System.Drawing.Printing.PrintDocument();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.comboBoxScale = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,6 +44,7 @@
             this.printPreviewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.printPreviewControl1.AutoZoom = false;
             this.printPreviewControl1.Location = new System.Drawing.Point(3, 28);
             this.printPreviewControl1.Name = "printPreviewControl1";
             this.printPreviewControl1.Size = new System.Drawing.Size(579, 294);
@@ -71,11 +73,13 @@
             // 
             // comboInstalledPrinters
             // 
+            this.comboInstalledPrinters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboInstalledPrinters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboInstalledPrinters.FormattingEnabled = true;
             this.comboInstalledPrinters.Location = new System.Drawing.Point(3, 3);
             this.comboInstalledPrinters.Name = "comboInstalledPrinters";
-            this.comboInstalledPrinters.Size = new System.Drawing.Size(560, 21);
+            this.comboInstalledPrinters.Size = new System.Drawing.Size(479, 21);
             this.comboInstalledPrinters.TabIndex = 3;
             this.comboInstalledPrinters.SelectedIndexChanged += new System.EventHandler(this.comboInstalledPrinters_SelectedIndexChanged);
             this.comboInstalledPrinters.SelectedValueChanged += new System.EventHandler(this.comboInstalledPrinters_SelectedValueChanged);
@@ -84,11 +88,25 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // comboBoxScale
+            // 
+            this.comboBoxScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxScale.FormattingEnabled = true;
+            this.comboBoxScale.Items.AddRange(new object[] {
+            "1",
+            "1.5",
+            "2"});
+            this.comboBoxScale.Location = new System.Drawing.Point(494, 3);
+            this.comboBoxScale.Name = "comboBoxScale";
+            this.comboBoxScale.Size = new System.Drawing.Size(69, 21);
+            this.comboBoxScale.TabIndex = 4;
+            // 
             // PrintConfigWnd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 355);
+            this.Controls.Add(this.comboBoxScale);
             this.Controls.Add(this.comboInstalledPrinters);
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.buttonCancel);
@@ -110,5 +128,6 @@
         private System.Windows.Forms.ComboBox comboInstalledPrinters;
         private System.Drawing.Printing.PrintDocument printDoc;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ComboBox comboBoxScale;
     }
 }
