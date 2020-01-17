@@ -187,13 +187,14 @@ namespace BarcodeDesktopApp.DataHandling
                 SQLiteDataReader sqlite_datareader = cmd.ExecuteReader();
                 while (sqlite_datareader.Read())
                 {
+                    int RBcode_ = sqlite_datareader.GetInt32(0);
                     string RPart_ = sqlite_datareader.GetString(1);
                     DateTime RDate_ = sqlite_datareader.GetDateTime(2);
                     int RTruck_ = sqlite_datareader.GetInt32(3);
                     string RMachine_ = sqlite_datareader.GetString(4);
                     string RCustomer_ = sqlite_datareader.GetString(5);
 
-                    BarcodeDataClass barcodeData = new BarcodeDataClass { BarcodePart = RPart_, BarcodeDate = RDate_, BarcodeTruck = RTruck_, BarcodeMachine = RMachine_, BarcodeCustomer = RCustomer_ };
+                    BarcodeDataClass barcodeData = new BarcodeDataClass { BarcodePart = RPart_, BarcodeDate = RDate_, BarcodeTruck = RTruck_, BarcodeMachine = RMachine_, BarcodeCustomer = RCustomer_, barcodePartID = RBcode_ };
                     rslt.Add(barcodeData);
                 }
             }

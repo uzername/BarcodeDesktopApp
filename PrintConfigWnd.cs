@@ -83,18 +83,23 @@ namespace BarcodeDesktopApp
                 
                 Font printFont = new Font("Arial", 6);
                 e.Graphics.DrawString(itemsToShow[currentPagePrinting - 1].BarcodeMachine, printFont, Brushes.Black, 1, 1);
-                e.Graphics.DrawString(itemsToShow[currentPagePrinting - 1].BarcodeCustomer, printFont, Brushes.Black, 1, 1+printFont.Height);
-                List<BarcodePartDataClass> bpart = handlingClassRef.getAllParts(itemsToShow[currentPagePrinting - 1].barcodePartID);
+                e.Graphics.DrawString(itemsToShow[currentPagePrinting - 1].BarcodeCustomer, printFont, Brushes.Black, 1, 1+printFont.Height);                
+                // clojure and lambda
+                BarcodePartDataClass bpdc = handlingClassRef.allPartsList.Find((BarcodePartDataClass in_bcode) => { return in_bcode.ID == itemsToShow[currentPagePrinting - 1].barcodePartID; });
                 //draw barcode
                 Barcode b = new Barcode();
                 b.IncludeLabel = true;
+
                 float dpix = e.Graphics.DpiX;
                 float dpiy = e.Graphics.DpiY;
                 int dpiXPrinter = e.PageSettings.PrinterResolution.X;
                 int dpiYPrinter = e.PageSettings.PrinterResolution.Y;
                 // https://www.pixelcalculator.com/
-                int W = (int)Math.Round(dpiXPrinter * handlingClassRef.newconfig.labelParameters.barcodeLabelWidthMM / 25.4);
-                // b.Encode(TYPE.EAN13, bpart[0].BarcodeRaw, Color.Black, Color.White, W, H);
+                int W = (int)Math.Round(96 * handlingClassRef.newconfig.labelParameters.barcodeLabelBCodeWidth / 25.4);
+                int H = (int)Math.Round(96 * handlingClassRef.newconfig.labelParameters.barcodeLabelBCodeHeight / 25.4);
+                Image bcodeImg = b.Encode(TYPE.EAN13, bpdc.BarcodeRaw, Color.Black, Color.White, W, H);
+                
+                e.Graphics.DrawImage(bcodeImg, 1, 1 + 2 * printFont.Height, W, H);
                 currentPagePrinting++;
                 e.HasMorePages = (currentPagePrinting <= maxPagePrinting);
             } else
