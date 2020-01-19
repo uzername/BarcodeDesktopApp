@@ -43,7 +43,7 @@ namespace BarcodeDesktopApp
                 if (refreshPartList) {
                     //dataHandlerLocal.allPartsList = dataHandlerLocal.getAllParts();
                     // line above was changed to this:
-                    dataHandlerLocal.allPartsList.Add(new BarcodePartDataClass { BarcodeType = BarcodeTypeEnum.EAN13, BarcodePart = newBarcodeWnd.partName, BarcodeRaw = newBarcodeWnd.barcodeString });
+                    dataHandlerLocal.allPartsList.Add(new BarcodePartDataClass { BarcodeType = BarcodeTypeEnum.EAN13, BarcodePart = newBarcodeWnd.partName, BarcodeRaw = newBarcodeWnd.barcodeString, ID = IDofRelatedPart });
                 }
                 // save new part
                 dataHandlerLocal.insertNewEntryToBarcodesList(IDofRelatedPart,newBarcodeWnd.BarcodeDate, newBarcodeWnd.BarcodeTruck, newBarcodeWnd.BarcodeCustomer, newBarcodeWnd.BarcodeMachine);
@@ -91,6 +91,11 @@ namespace BarcodeDesktopApp
         private void ObjectListViewMain_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             buttonPrint.Enabled = (objectListViewMain.CheckedObjects.Count > 0);
+        }
+
+        private void ButtonCopyRecord_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

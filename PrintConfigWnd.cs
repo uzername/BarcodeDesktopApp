@@ -21,6 +21,7 @@ namespace BarcodeDesktopApp
         public DataHandlingClass handlingClassRef = null;
         bool ignoreInputEvents = true;
         bool doomedToReturn = true;
+        double currentControlZoom;
 
         public PrintConfigWnd()
         {
@@ -60,6 +61,7 @@ namespace BarcodeDesktopApp
             maxPagePrinting = itemsToShow.Count;
             this.printPreviewControl1.AutoZoom = false;
             this.printPreviewControl1.Zoom = 1.0;
+            currentControlZoom = 1.0;
             this.printPreviewControl1.Rows = maxPagePrinting;
             currentPagePrinting = 1;
 
@@ -164,13 +166,36 @@ namespace BarcodeDesktopApp
 
         private void comboInstalledPrinters_SelectedValueChanged(object sender, EventArgs e)
         {
-            
+            //if (ignoreInputEvents) return;
+
         }
 
         private void PrintConfigWnd_FormClosing(object sender, FormClosingEventArgs e)  {
             //save here last selected printer
             handlingClassRef.newconfig.labelParameters.latestPickedPrinter = comboInstalledPrinters.Text;
             handlingClassRef.saveDataToConfigFile();
+        }
+
+        private void ComboBoxScale_TextChanged(object sender, EventArgs e)
+        {
+            if (ignoreInputEvents) return;
+            if (String.IsNullOrEmpty(comboBoxScale.Text) )
+            {
+                currentControlZoom = 1.0;
+                printPreviewControl1.Zoom = currentControlZoom;
+                return;
+            }
+            double rsltparse = 0.0;
+            bool value = double.TryParse(comboBoxScale.Text, out rsltparse);
+            if (value)  {
+                currentControlZoom = rsltparse;
+                printPreviewControl1.Zoom = currentControlZoom;
+            } else
+            {
+                ignoreInputEvents = true;
+                comboBoxScale.Text = currentControlZoom.ToString();
+                ignoreInputEvents = false;
+            }
         }
     }
 }

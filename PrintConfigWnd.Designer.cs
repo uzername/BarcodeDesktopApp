@@ -100,6 +100,7 @@
             this.comboBoxScale.Name = "comboBoxScale";
             this.comboBoxScale.Size = new System.Drawing.Size(69, 21);
             this.comboBoxScale.TabIndex = 4;
+            this.comboBoxScale.TextChanged += new System.EventHandler(this.ComboBoxScale_TextChanged);
             // 
             // PrintConfigWnd
             // 

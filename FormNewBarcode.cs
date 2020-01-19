@@ -51,6 +51,7 @@ namespace BarcodeDesktopApp
 
         private void buttonForOK_Click(object sender, EventArgs e)
         {
+            // your princess is in another castle. Saving is called in FormMain, after this dialog closes with confirmation
             if (String.IsNullOrEmpty(textBoxBarcode.Text))
             {
                 errorProviderPart.SetError(textBoxBarcode, LocalizableStrings.ErrorEmptyBarcode);

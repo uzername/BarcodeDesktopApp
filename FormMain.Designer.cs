@@ -108,6 +108,7 @@
             resources.ApplyResources(this.buttonCopyRecord, "buttonCopyRecord");
             this.buttonCopyRecord.Name = "buttonCopyRecord";
             this.buttonCopyRecord.UseVisualStyleBackColor = true;
+            this.buttonCopyRecord.Click += new System.EventHandler(this.ButtonCopyRecord_Click);
             // 
             // buttonPrint
             // 

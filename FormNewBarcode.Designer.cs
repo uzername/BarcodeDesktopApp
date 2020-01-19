@@ -129,7 +129,7 @@
             this.DateDelivery.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.DateDelivery.Name = "DateDelivery";
             this.DateDelivery.Size = new System.Drawing.Size(161, 22);
-            this.DateDelivery.TabIndex = 2;
+            this.DateDelivery.TabIndex = 3;
             // 
             // cmbPart
             // 
@@ -151,7 +151,7 @@
             this.textCustomer.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textCustomer.Name = "textCustomer";
             this.textCustomer.Size = new System.Drawing.Size(385, 22);
-            this.textCustomer.TabIndex = 4;
+            this.textCustomer.TabIndex = 5;
             // 
             // textMachine
             // 
@@ -159,7 +159,7 @@
             this.textMachine.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textMachine.Name = "textMachine";
             this.textMachine.Size = new System.Drawing.Size(385, 22);
-            this.textMachine.TabIndex = 5;
+            this.textMachine.TabIndex = 6;
             // 
             // pictureBoxBarCode
             // 
@@ -176,7 +176,7 @@
             this.buttonForOK.Location = new System.Drawing.Point(12, 191);
             this.buttonForOK.Name = "buttonForOK";
             this.buttonForOK.Size = new System.Drawing.Size(69, 23);
-            this.buttonForOK.TabIndex = 6;
+            this.buttonForOK.TabIndex = 7;
             this.buttonForOK.Text = "OK";
             this.buttonForOK.UseVisualStyleBackColor = true;
             this.buttonForOK.Click += new System.EventHandler(this.buttonForOK_Click);
@@ -187,7 +187,7 @@
             this.buttonForCancel.Location = new System.Drawing.Point(88, 191);
             this.buttonForCancel.Name = "buttonForCancel";
             this.buttonForCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonForCancel.TabIndex = 7;
+            this.buttonForCancel.TabIndex = 8;
             this.buttonForCancel.Text = "Cancel";
             this.buttonForCancel.UseVisualStyleBackColor = true;
             // 
@@ -201,7 +201,7 @@
             0});
             this.numberTruck.Name = "numberTruck";
             this.numberTruck.Size = new System.Drawing.Size(161, 22);
-            this.numberTruck.TabIndex = 3;
+            this.numberTruck.TabIndex = 4;
             this.numberTruck.Value = new decimal(new int[] {
             1,
             0,
@@ -215,7 +215,7 @@
             this.buttonGenerate.Location = new System.Drawing.Point(219, 36);
             this.buttonGenerate.Name = "buttonGenerate";
             this.buttonGenerate.Size = new System.Drawing.Size(30, 30);
-            this.buttonGenerate.TabIndex = 16;
+            this.buttonGenerate.TabIndex = 2;
             this.buttonGenerate.UseVisualStyleBackColor = true;
             this.buttonGenerate.Click += new System.EventHandler(this.buttonGenerate_Click);
             // 
