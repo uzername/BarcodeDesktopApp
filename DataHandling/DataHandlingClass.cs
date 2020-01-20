@@ -13,6 +13,7 @@ namespace BarcodeDesktopApp.DataHandling
     {
         public BarcodePrintingParameterClass labelParameters = new BarcodePrintingParameterClass();
         public string pathToDatabase;
+        public string langCode  = "ru-RU";
     }
     public class DbFilterStruct  {
         // complex filters
@@ -165,7 +166,7 @@ namespace BarcodeDesktopApp.DataHandling
 
             }
             List<BarcodeDataClass> rslt = new List<BarcodeDataClass>();
-            String dbquery = "Select Barcodes.ID,  BarcodePart, BarcodeDate, BarcodeTruck, BarcodeMachine, BarcodeCustomer, BarcodeDateAdded from Barcodes inner join Parts on Barcodes.ID_part = Parts.ID " + condition + " ORDER BY BarcodeDateAdded DESC ";
+            String dbquery = "Select Barcodes.ID_part,  BarcodePart, BarcodeDate, BarcodeTruck, BarcodeMachine, BarcodeCustomer, BarcodeDateAdded from Barcodes inner join Parts on Barcodes.ID_part = Parts.ID " + condition + " ORDER BY BarcodeDateAdded DESC ";
             SQLiteConnection sql_con = new SQLiteConnection("Data Source=" + newconfig.pathToDatabase);
             sql_con.Open();
             using (SQLiteCommand cmd = new SQLiteCommand(sql_con))

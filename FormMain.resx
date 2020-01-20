@@ -157,7 +157,7 @@
     <value>2, 2</value>
   </data>
   <data name="objectListViewMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 332</value>
+    <value>660, 357</value>
   </data>
   <data name="objectListViewMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -172,16 +172,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;objectListViewMain.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="buttonNewEmptyRecord.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="buttonNewEmptyRecord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 340</value>
+    <value>2, 365</value>
   </data>
   <data name="buttonNewEmptyRecord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 61</value>
+    <value>75, 36</value>
   </data>
   <data name="buttonNewEmptyRecord.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -200,7 +200,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonNewEmptyRecord.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="buttonCopyRecord.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -209,10 +209,10 @@
     <value>False</value>
   </data>
   <data name="buttonCopyRecord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 340</value>
+    <value>84, 365</value>
   </data>
   <data name="buttonCopyRecord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 61</value>
+    <value>97, 36</value>
   </data>
   <data name="buttonCopyRecord.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -231,7 +231,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCopyRecord.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="buttonPrint.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -240,10 +240,10 @@
     <value>False</value>
   </data>
   <data name="buttonPrint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 340</value>
+    <value>187, 365</value>
   </data>
   <data name="buttonPrint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 61</value>
+    <value>75, 36</value>
   </data>
   <data name="buttonPrint.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -261,16 +261,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonPrint.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="buttonFilter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="buttonFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 340</value>
+    <value>268, 365</value>
   </data>
   <data name="buttonFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 61</value>
+    <value>75, 36</value>
   </data>
   <data name="buttonFilter.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -278,6 +278,9 @@
   <data name="buttonFilter.Text" xml:space="preserve">
     <value>LookUp
 &lt;Filter&gt;</value>
+  </data>
+  <data name="buttonFilter.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;buttonFilter.Name" xml:space="preserve">
     <value>buttonFilter</value>
@@ -289,6 +292,36 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonFilter.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="comboLanguage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="comboLanguage.Items" xml:space="preserve">
+    <value>EN</value>
+  </data>
+  <data name="comboLanguage.Items1" xml:space="preserve">
+    <value>RU</value>
+  </data>
+  <data name="comboLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 380</value>
+  </data>
+  <data name="comboLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 21</value>
+  </data>
+  <data name="comboLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;comboLanguage.Name" xml:space="preserve">
+    <value>comboLanguage</value>
+  </data>
+  <data name="&gt;&gt;comboLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboLanguage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -298,7 +331,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>600, 406</value>
+    <value>665, 406</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>425, 0</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Barcodes</value>

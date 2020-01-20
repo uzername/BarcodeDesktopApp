@@ -39,6 +39,7 @@
             this.buttonCopyRecord = new System.Windows.Forms.Button();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.buttonFilter = new System.Windows.Forms.Button();
+            this.comboLanguage = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             this.objectListViewMain.AllColumns.Add(this.olvColumnMachineName);
             this.objectListViewMain.AllColumns.Add(this.olvColumnCustomer);
             resources.ApplyResources(this.objectListViewMain, "objectListViewMain");
+            this.objectListViewMain.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
             this.objectListViewMain.CellEditUseWholeCell = false;
             this.objectListViewMain.CheckBoxes = true;
             this.objectListViewMain.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -124,10 +126,21 @@
             this.buttonFilter.UseVisualStyleBackColor = true;
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
             // 
+            // comboLanguage
+            // 
+            resources.ApplyResources(this.comboLanguage, "comboLanguage");
+            this.comboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboLanguage.FormattingEnabled = true;
+            this.comboLanguage.Items.AddRange(new object[] {
+            resources.GetString("comboLanguage.Items"),
+            resources.GetString("comboLanguage.Items1")});
+            this.comboLanguage.Name = "comboLanguage";
+            // 
             // FormMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.comboLanguage);
             this.Controls.Add(this.buttonFilter);
             this.Controls.Add(this.buttonPrint);
             this.Controls.Add(this.buttonCopyRecord);
@@ -152,6 +165,7 @@
         private BrightIdeasSoftware.OLVColumn olvColumnTruckNumber;
         private BrightIdeasSoftware.OLVColumn olvColumnMachineName;
         private BrightIdeasSoftware.OLVColumn olvColumnCustomer;
+        private System.Windows.Forms.ComboBox comboLanguage;
     }
 }
 

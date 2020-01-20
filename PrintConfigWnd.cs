@@ -11,6 +11,7 @@ using System.Drawing.Printing;
 using System.Collections;
 using BarcodeDesktopApp.DataHandling;
 using BarcodeLib;
+using System.Drawing.Drawing2D;
 
 namespace BarcodeDesktopApp
 {
@@ -80,18 +81,19 @@ namespace BarcodeDesktopApp
         private int maxPagePrinting = 0;
         private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
-            
             if (currentPagePrinting <= maxPagePrinting)  {
-                
-                Font printFont = new Font("Arial", 6);
+                // blur go away!
+                e.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.None; // or PixelOffsetMode.Half
+                Font printFont = new Font("Courier New", 7);
                 e.Graphics.DrawString(itemsToShow[currentPagePrinting - 1].BarcodeMachine, printFont, Brushes.Black, 1, 1);
                 e.Graphics.DrawString(itemsToShow[currentPagePrinting - 1].BarcodeCustomer, printFont, Brushes.Black, 1, 1+printFont.Height);                
                 // clojure and lambda
                 BarcodePartDataClass bpdc = handlingClassRef.allPartsList.Find((BarcodePartDataClass in_bcode) => { return in_bcode.ID == itemsToShow[currentPagePrinting - 1].barcodePartID; });
                 //draw barcode
                 Barcode b = new Barcode();
-                b.IncludeLabel = true;
-
+                b.IncludeLabel = false; // well, the label text is blurry. To overcome this we need to modify barcodelib
+                b.Alignment = AlignmentPositions.LEFT;
                 float dpix = e.Graphics.DpiX;
                 float dpiy = e.Graphics.DpiY;
                 int dpiXPrinter = e.PageSettings.PrinterResolution.X;
@@ -101,15 +103,44 @@ namespace BarcodeDesktopApp
                 int H = (int)Math.Round(96 * handlingClassRef.newconfig.labelParameters.barcodeLabelBCodeHeight / 25.4);
                 Image bcodeImg = b.Encode(TYPE.EAN13, bpdc.BarcodeRaw, Color.Black, Color.White, W, H);
                 
-                e.Graphics.DrawImage(bcodeImg, 1, 1 + 2 * printFont.Height, W, H);
+                e.Graphics.DrawImageUnscaled(bcodeImg, 40, 1 + 2 * printFont.Height);
+                RectangleF fff = e.Graphics.ClipBounds;
+                
+                e.Graphics.FillRectangle(Brushes.White, 40, 1 + printFont.Height + H, fff.Width-1, printFont.Height+2);
+                e.Graphics.DrawString("T"+ itemsToShow[currentPagePrinting - 1].BarcodeTruck.ToString("D3")+"     "+ bpdc.BarcodeRaw, printFont,Brushes.Black, 1, 1 + printFont.Height + H+1);
+
+                e.Graphics.DrawString(itemsToShow[currentPagePrinting - 1].BarcodePart, printFont,Brushes.Black, 1, 1+2*printFont.Height+H);
+
                 currentPagePrinting++;
                 e.HasMorePages = (currentPagePrinting <= maxPagePrinting);
-            } else
-            {
+            } else {
                 e.HasMorePages = false;
                 // risk of infinite cycle
                 currentPagePrinting = 1;
             }
+        }
+
+        // http://csharphelper.com/blog/2014/07/draw-rotated-text-in-c/
+        // Draw a rotated string at a particular position.
+        private void DrawRotatedTextAt(Graphics gr, float angle,
+            string txt, int x, int y, Font the_font, Brush the_brush)
+        {
+            // Save the graphics state.
+            GraphicsState state = gr.Save();
+            gr.ResetTransform();
+
+            // Rotate.
+            gr.RotateTransform(angle);
+
+            // Translate to desired position. Be sure to append
+            // the rotation so it occurs after the rotation.
+            gr.TranslateTransform(x, y, MatrixOrder.Append);
+
+            // Draw the text at the origin.
+            gr.DrawString(txt, the_font, the_brush, 0, 0);
+
+            // Restore the graphics state.
+            gr.Restore(state);
         }
 
         private void PrintDoc_QueryPageSettings(object sender, QueryPageSettingsEventArgs e)
