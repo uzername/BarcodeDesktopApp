@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace BarcodeDesktopApp
 {
+    /// <summary>
+    /// https://stackoverflow.com/questions/6980888/localization-at-runtime
+    /// </summary>
     public static class RuntimeLocalizer
     {
         public static void ChangeCulture(Form frm, string cultureCode)

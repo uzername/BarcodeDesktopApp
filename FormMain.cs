@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +30,19 @@ namespace BarcodeDesktopApp
             lstForTableInForm = dataHandlerLocal.getBarcodesDataFromDataBase(null);
             dataHandlerLocal.allPartsList = dataHandlerLocal.getAllParts();
             this.objectListViewMain.SetObjects(lstForTableInForm);
+            RuntimeLocalizer.ChangeCulture(this, dataHandlerLocal.newconfig.langCode);
+            //
+        }
+
+        private void relocalizeForm(string in_RawDropdownCaption)
+        {
+            ComponentResourceManager resources = new ComponentResourceManager(this.GetType());
+
+            if (in_RawDropdownCaption == resources.GetString("comboLanguage.Items"))
+            {
+                 
+            }
+            RuntimeLocalizer.ChangeCulture(this, "en-US");
         }
 
         private void buttonNewEmptyRecord_Click(object sender, EventArgs e)
